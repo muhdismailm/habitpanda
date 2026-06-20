@@ -58,10 +58,10 @@ export function HabitForm({ initialValues, onSubmit, onCancel }: HabitFormProps)
 
   const selectedIcon = watch("icon");
   const selectedColor = watch("color");
-  const selectedSchedule = watch("schedule");
+  const selectedSchedule = watch("schedule") || [];
 
   const toggleDay = (dayId: number) => {
-    const current = selectedSchedule || [];
+    const current = selectedSchedule;
     const updated = current.includes(dayId)
       ? current.filter((id) => id !== dayId)
       : [...current, dayId];
@@ -121,6 +121,7 @@ export function HabitForm({ initialValues, onSubmit, onCancel }: HabitFormProps)
       {/* Schedule */}
       <div className="space-y-2">
         <label className="text-sm font-medium">Schedule</label>
+        <p className="text-xs text-muted-foreground mb-2">Select the days you want to track this habit.</p>
         <div className="flex gap-2">
           {DAYS.map((day) => {
             const isSelected = selectedSchedule.includes(day.id);

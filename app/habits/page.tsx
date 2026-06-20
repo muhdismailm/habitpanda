@@ -7,7 +7,7 @@ import { HabitFormValues } from "@/lib/validations";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import * as Icons from "lucide-react";
-import { calculateCurrentStreak, calculateLongestStreak } from "@/lib/streak";
+import { calculateCurrentStreak, calculateLongestStreak, normalizeDate } from "@/lib/streak";
 import Link from "next/link";
 
 export default function HabitsPage() {
@@ -71,19 +71,48 @@ export default function HabitsPage() {
 
             return (
               <div key={habit.id} className="p-5 rounded-2xl border bg-card text-card-foreground shadow-sm flex flex-col gap-5 hover:shadow-md transition-shadow">
-                <div className="flex items-center gap-4">
-                  <div className="p-3 rounded-xl" style={{ backgroundColor: `${habit.color}15`, color: habit.color }}>
-                    <Icon className="w-7 h-7" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-lg leading-tight">{habit.name}</h3>
-                    <p className="text-xs text-muted-foreground mt-1">
-                      {habit.schedule.length === 7 ? "Every day" : `${habit.schedule.length} days/week`}
-                    </p>
-                  </div>
+              <div className="flex items-center gap-4">
+                <div className="p-3 rounded-xl" style={{ backgroundColor: `${habit.color}15`, color: habit.color }}>
+                  <Icon className="w-7 h-7" />
                 </div>
+                <div>
+                  <h3 className="font-semibold text-lg leading-tight">{habit.name}</h3>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    {habit.schedule.length === 7 ? "Every day" : `${habit.schedule.length} days/week`}
+                  </p>
+                </div>
+              </div>
 
-                <div className="grid grid-cols-2 gap-3 text-sm">
+              {/* Past 7 Days Tracker */}
+              <div className="flex justify-between items-center bg-muted/30 p-2 rounded-xl border">
+                {[...Array(7)].map((_, i) => {
+                  const d = new Date();
+                  d.setDate(d.getDate() - (6 - i));
+                  const dateStr = normalizeDate(d);
+                  const isScheduled = habit.schedule.includes(d.getDay());
+                  const isCompleted = habit.completedDates.includes(dateStr);
+                  
+                  return (
+                    <button
+                      key={dateStr}
+                      onClick={() => toggleCompletion(habit.id, d)}
+                      disabled={!isScheduled}
+                      className={`flex flex-col items-center gap-1 p-1 rounded-lg transition-colors ${!isScheduled ? 'opacity-30 cursor-not-allowed' : 'hover:bg-muted/80'}`}
+                    >
+                      <span className="text-[10px] uppercase font-semibold text-muted-foreground">
+                        {d.toLocaleDateString('en-US', { weekday: 'narrow' })}
+                      </span>
+                      <div 
+                        className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${isCompleted ? 'bg-primary border-primary text-primary-foreground' : 'border-muted-foreground/30 text-transparent'}`}
+                      >
+                        <Icons.Check className="w-3 h-3" />
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="grid grid-cols-2 gap-3 text-sm">
                   <div className="bg-muted/50 p-3 rounded-xl text-center border">
                     <p className="text-muted-foreground text-[10px] font-bold uppercase tracking-wider mb-1">Current</p>
                     <p className="text-2xl font-bold">{currentStreak} <span className="text-xs font-normal text-muted-foreground">days</span></p>
