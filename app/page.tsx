@@ -106,7 +106,7 @@ export default function Home() {
       {/* CTA Section */}
       <section className="py-24 px-6 text-center">
         <div className="bg-primary/90 backdrop-blur-xl text-primary-foreground rounded-[3rem] p-12 max-w-4xl mx-auto shadow-2xl shadow-primary/20 border border-white/10 relative overflow-hidden">
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz4KPC9zdmc+')] opacity-20" />
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz4KPC9zdmc+')] opacity-20 pointer-events-none" />
           <h2 className="text-3xl md:text-5xl font-bold mb-6">Ready to build better habits?</h2>
           <p className="text-primary-foreground/80 text-lg mb-8 max-w-xl mx-auto">
             Everything runs securely in your browser. Start growing your virtual panda today!

@@ -9,12 +9,12 @@ interface ActivityHeatmapProps {
 }
 
 export function ActivityHeatmap({ habits }: ActivityHeatmapProps) {
-  const days = 90; // Last 90 days
+  const days = 7; // Last 7 days
 
   const activityMap = useMemo(() => {
     const map = new Map<string, number>();
     
-    // Initialize last 90 days
+    // Initialize last 7 days
     const today = new Date();
     for (let i = days - 1; i >= 0; i--) {
       const d = new Date(today);
@@ -44,18 +44,24 @@ export function ActivityHeatmap({ habits }: ActivityHeatmapProps) {
   };
 
   return (
-    <div className="bg-card text-card-foreground rounded-2xl p-6 border shadow-sm mt-8">
-      <h3 className="font-semibold text-lg mb-4">Activity Heatmap (Last 90 Days)</h3>
-      <div className="flex gap-1 overflow-x-auto pb-2 scrollbar-thin">
-        {activityMap.map(([date, count]) => (
-          <div 
-            key={date}
-            className={`w-4 h-4 rounded-sm flex-shrink-0 transition-colors ${getColor(count)}`}
-            title={`${date}: ${count} habits completed`}
-          />
-        ))}
+    <div className="bg-card/80 backdrop-blur-xl text-card-foreground rounded-[2rem] p-6 border border-white/20 dark:border-white/5 shadow-lg shadow-green-900/5 mt-8">
+      <h3 className="font-semibold text-lg mb-4">Activity Heatmap (Last 7 Days)</h3>
+      <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-thin">
+        {activityMap.map(([date, count]) => {
+          const d = new Date(date);
+          const dayName = d.toLocaleDateString('en-US', { weekday: 'short' });
+          return (
+            <div key={date} className="flex flex-col items-center gap-2">
+              <span className="text-xs font-medium text-muted-foreground">{dayName}</span>
+              <div 
+                className={`w-10 h-10 rounded-xl flex-shrink-0 transition-colors shadow-sm ${getColor(count)}`}
+                title={`${date}: ${count} habits completed`}
+              />
+            </div>
+          );
+        })}
       </div>
-      <div className="flex justify-end items-center gap-2 mt-4 text-xs text-muted-foreground">
+      <div className="flex justify-end items-center gap-2 mt-6 text-xs text-muted-foreground">
         <span>Less</span>
         <div className="flex gap-1">
           <div className="w-3 h-3 rounded-sm bg-muted/50 dark:bg-muted/20" />
