@@ -11,7 +11,7 @@ export default function Home() {
       </div>
 
       {/* Panda Den Background - Mountains and Bamboo */}
-      <div className="fixed inset-0 pointer-events-none z-0">
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         <svg className="absolute bottom-0 w-full h-96 opacity-5 dark:opacity-10" viewBox="0 0 1200 400" preserveAspectRatio="xMidYMid slice">
           <defs>
             <linearGradient id="mountainGradient" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -21,10 +21,15 @@ export default function Home() {
           </defs>
           <polygon points="0,300 200,100 400,250 600,80 800,220 1000,120 1200,300 1200,400 0,400" fill="url(#mountainGradient)" />
         </svg>
-        <div className="absolute left-0 top-20 opacity-20 dark:opacity-30 text-6xl">🎋</div>
-        <div className="absolute right-0 top-40 opacity-20 dark:opacity-30 text-5xl">🎋</div>
-        <div className="absolute left-10 bottom-32 opacity-15 dark:opacity-25 text-4xl">🌿</div>
-        <div className="absolute right-8 bottom-40 opacity-15 dark:opacity-25 text-5xl">🌿</div>
+        
+        {/* Falling elements */}
+        <div className="absolute left-[10%] top-20 opacity-20 dark:opacity-30 text-6xl animate-float-down">🎋</div>
+        <div className="absolute left-[20%] -top-10 opacity-15 dark:opacity-25 text-4xl animate-float-down delay-2000">🌿</div>
+        <div className="absolute left-[35%] -top-20 opacity-10 dark:opacity-20 text-3xl animate-float-down delay-5000">🍃</div>
+        <div className="absolute left-[50%] -top-5 opacity-20 dark:opacity-30 text-5xl animate-float-down delay-3000">🎋</div>
+        <div className="absolute left-[65%] -top-15 opacity-15 dark:opacity-25 text-4xl animate-float-down delay-1000">🌿</div>
+        <div className="absolute left-[80%] -top-10 opacity-20 dark:opacity-30 text-5xl animate-float-down delay-7000">🎋</div>
+        <div className="absolute left-[90%] -top-20 opacity-15 dark:opacity-25 text-5xl animate-float-down delay-4000">🌿</div>
       </div>
 
       <div className="relative z-10">
@@ -129,8 +134,10 @@ export default function Home() {
         {/* CTA Section */}
         <section className="py-24 px-6 text-center">
           <div className="bg-gradient-to-r from-emerald-600 to-green-600 dark:from-emerald-700 dark:to-green-700 text-white rounded-3xl p-12 max-w-4xl mx-auto shadow-2xl shadow-green-900/20 border-4 border-stone-800 dark:border-amber-200 relative overflow-hidden">
-            <div className="absolute top-4 right-8 text-6xl opacity-30">🐼</div>
-            <div className="absolute bottom-4 left-8 text-6xl opacity-30">🌿</div>
+            <div className="absolute top-4 right-8 text-6xl opacity-30 animate-breathe">🐼</div>
+            <div className="absolute top-0 left-[10%] text-6xl opacity-30 animate-float-down delay-2000">🌿</div>
+            <div className="absolute top-[-10%] right-[20%] text-5xl opacity-20 animate-float-down delay-4000">🎋</div>
+            <div className="absolute top-[-5%] left-[30%] text-4xl opacity-20 animate-float-down delay-1000">🍃</div>
             <h2 className="text-4xl md:text-6xl font-black mb-6 relative z-10">Ready to build better habits?</h2>
             <p className="text-green-100 font-semibold text-xl mb-8 max-w-xl mx-auto relative z-10">
               Everything runs securely in your browser. Start growing your virtual panda today!

@@ -54,7 +54,7 @@ export default function DashboardPage() {
     <div className="min-h-screen pb-40 overflow-x-hidden bg-gradient-to-b from-stone-50 via-amber-50 to-stone-100 dark:from-stone-950 dark:via-stone-900 dark:to-stone-950 relative">
 
       {/* Panda Den Background - Mountains and Bamboo */}
-      <div className="fixed inset-0 pointer-events-none z-0">
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         {/* Mountain silhouettes */}
         <svg className="absolute bottom-0 w-full h-96 opacity-5 dark:opacity-10" viewBox="0 0 1200 400" preserveAspectRatio="xMidYMid slice">
           <defs>
@@ -66,11 +66,14 @@ export default function DashboardPage() {
           <polygon points="0,300 200,100 400,250 600,80 800,220 1000,120 1200,300 1200,400 0,400" fill="url(#mountainGradient)" />
         </svg>
 
-        {/* Bamboo stalks on sides */}
-        <div className="absolute left-0 top-20 opacity-20 dark:opacity-30 text-6xl">🎋</div>
-        <div className="absolute right-0 top-40 opacity-20 dark:opacity-30 text-5xl">🎋</div>
-        <div className="absolute left-10 bottom-32 opacity-15 dark:opacity-25 text-4xl">🌿</div>
-        <div className="absolute right-8 bottom-40 opacity-15 dark:opacity-25 text-5xl">🌿</div>
+        {/* Falling elements */}
+        <div className="absolute left-[10%] top-20 opacity-20 dark:opacity-30 text-6xl animate-float-down">🎋</div>
+        <div className="absolute left-[20%] -top-10 opacity-15 dark:opacity-25 text-4xl animate-float-down delay-2000">🌿</div>
+        <div className="absolute left-[35%] -top-20 opacity-10 dark:opacity-20 text-3xl animate-float-down delay-5000">🍃</div>
+        <div className="absolute left-[50%] -top-5 opacity-20 dark:opacity-30 text-5xl animate-float-down delay-3000">🎋</div>
+        <div className="absolute left-[65%] -top-15 opacity-15 dark:opacity-25 text-4xl animate-float-down delay-1000">🌿</div>
+        <div className="absolute left-[80%] -top-10 opacity-20 dark:opacity-30 text-5xl animate-float-down delay-7000">🎋</div>
+        <div className="absolute left-[90%] -top-20 opacity-15 dark:opacity-25 text-5xl animate-float-down delay-4000">🌿</div>
       </div>
 
       <BambooScroll />
