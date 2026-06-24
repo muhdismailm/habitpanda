@@ -291,17 +291,27 @@ export default function DashboardPage() {
       <div className="container mx-auto p-6 max-w-4xl relative z-10">
 
         {/* Header Actions */}
-        <div className="flex justify-end gap-3 mb-6">
-          <ThemeToggle />
-          <Link href="/settings">
+        <div className="flex justify-between items-center mb-6">
+          <Link href="/">
             <Button
               variant="outline"
-              size="icon"
-              className="border-2 border-stone-800 dark:border-amber-200 hover:bg-amber-100 dark:hover:bg-amber-900/20"
+              className="border-2 border-stone-800 dark:border-amber-200 hover:bg-amber-100 dark:hover:bg-amber-900/20 font-bold gap-2"
             >
-              <Icons.Settings className="w-5 h-5" />
+              <Icons.ArrowLeft className="w-4 h-4" /> Home
             </Button>
           </Link>
+          <div className="flex gap-3">
+            <ThemeToggle />
+            <Link href="/settings">
+              <Button
+                variant="outline"
+                size="icon"
+                className="border-2 border-stone-800 dark:border-amber-200 hover:bg-amber-100 dark:hover:bg-amber-900/20"
+              >
+                <Icons.Settings className="w-5 h-5" />
+              </Button>
+            </Link>
+          </div>
         </div>
 
         {/* Top Section: Panda Stats - Panda Den Theme */}
