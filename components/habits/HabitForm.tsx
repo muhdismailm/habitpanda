@@ -69,9 +69,9 @@ export function HabitForm({ initialValues, onSubmit, onCancel }: HabitFormProps)
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 md:space-y-6">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 md:space-y-6">
       {/* Name */}
-      <div className="space-y-1.5 md:space-y-2">
+      <div className="space-y-1 md:space-y-2">
         <label className="text-sm md:text-base font-bold text-stone-900 dark:text-amber-100">Habit Name</label>
         <Input 
           placeholder="e.g. Drink 2L Water" 
@@ -82,16 +82,16 @@ export function HabitForm({ initialValues, onSubmit, onCancel }: HabitFormProps)
       </div>
 
       {/* Icon Selection */}
-      <div className="space-y-1.5 md:space-y-2">
+      <div className="space-y-1 md:space-y-2">
         <label className="text-sm md:text-base font-bold text-stone-900 dark:text-amber-100">Icon</label>
-        <div className="flex flex-wrap gap-1.5 md:gap-2">
+        <div className="grid grid-cols-5 sm:flex sm:flex-wrap gap-2 md:gap-2">
           {Object.entries(ICONS).map(([name, IconComp]) => (
             <button
               key={name}
               type="button"
               onClick={() => setValue("icon", name, { shouldValidate: true })}
               className={cn(
-                "p-2 md:p-3 rounded-xl md:rounded-2xl border-2 transition-all",
+                "p-2 md:p-3 rounded-xl md:rounded-2xl border-2 transition-all flex items-center justify-center",
                 selectedIcon === name 
                   ? "border-green-600 bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400" 
                   : "border-stone-800/20 dark:border-amber-200/20 hover:border-stone-800 dark:hover:border-amber-200 text-stone-600 dark:text-stone-400"
@@ -105,7 +105,7 @@ export function HabitForm({ initialValues, onSubmit, onCancel }: HabitFormProps)
       </div>
 
       {/* Color Selection */}
-      <div className="space-y-1.5 md:space-y-2">
+      <div className="space-y-1 md:space-y-2">
         <label className="text-sm md:text-base font-bold text-stone-900 dark:text-amber-100">Color</label>
         <div className="flex flex-wrap gap-2 md:gap-3">
           {COLORS.map((color) => (
@@ -125,7 +125,7 @@ export function HabitForm({ initialValues, onSubmit, onCancel }: HabitFormProps)
       </div>
 
       {/* Schedule */}
-      <div className="space-y-1.5 md:space-y-2">
+      <div className="space-y-1 md:space-y-2">
         <label className="text-sm md:text-base font-bold text-stone-900 dark:text-amber-100">Schedule</label>
         <p className="text-xs text-stone-600 dark:text-amber-200/70 mb-2">Select the days you want to track this habit.</p>
         <div className="flex flex-wrap gap-1.5 md:gap-2">
@@ -137,7 +137,7 @@ export function HabitForm({ initialValues, onSubmit, onCancel }: HabitFormProps)
                 type="button"
                 onClick={() => toggleDay(day.id)}
                 className={cn(
-                  "w-8 h-8 md:w-10 md:h-10 rounded-full font-black text-xs md:text-sm transition-colors shrink-0 border-2",
+                  "w-8 h-8 md:w-10 md:h-10 rounded-full font-black text-xs md:text-sm transition-colors shrink-0 border-2 flex items-center justify-center",
                   isSelected
                     ? "bg-green-600 border-green-700 text-white shadow-inner"
                     : "bg-stone-100 dark:bg-stone-800 border-stone-800/20 dark:border-amber-200/20 text-stone-500 dark:text-amber-300/50 hover:bg-stone-200 dark:hover:bg-stone-700"

@@ -100,7 +100,7 @@ export default function HabitsPage() {
               <DialogTrigger asChild>
                 <Button className="border-2 border-stone-800 dark:border-amber-200 font-bold bg-green-500 hover:bg-green-600 text-white dark:bg-green-600 dark:hover:bg-green-500">Create Habit 🎋</Button>
               </DialogTrigger>
-              <DialogContent className="max-w-md border-2 border-stone-800 dark:border-amber-200 rounded-3xl">
+                <DialogContent className="w-[92vw] sm:max-w-md border-2 border-stone-800 dark:border-amber-200 rounded-2xl md:rounded-3xl p-4 md:p-6">
                 <DialogHeader>
                   <DialogTitle className="font-black text-xl">Create New Habit</DialogTitle>
                 </DialogHeader>
