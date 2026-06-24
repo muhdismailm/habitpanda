@@ -86,12 +86,12 @@ export default function HabitsPage() {
       </div>
 
       <div className="container mx-auto p-6 max-w-5xl relative z-10">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 md:mb-8">
           <div>
-            <h1 className="text-4xl font-black text-stone-900 dark:text-amber-100">🌿 My Habits</h1>
-            <p className="text-stone-700 dark:text-amber-200 font-semibold mt-1">Manage your daily goals and track your streaks.</p>
+            <h1 className="text-3xl md:text-4xl font-black text-stone-900 dark:text-amber-100">🌿 My Habits</h1>
+            <p className="text-sm md:text-base text-stone-700 dark:text-amber-200 font-semibold mt-1">Manage your daily goals and track your streaks.</p>
           </div>
-          <div className="flex gap-3">
+          <div className="flex flex-wrap gap-2 md:gap-3 w-full md:w-auto">
             <ThemeToggle />
             <Link href="/dashboard">
               <Button variant="outline" className="border-2 border-stone-800 dark:border-amber-200 font-bold hover:bg-stone-900 dark:hover:bg-amber-900/40 hover:text-white dark:hover:text-amber-100">Back to Dashboard</Button>
@@ -112,19 +112,19 @@ export default function HabitsPage() {
 
         {/* Toolbar: Search & Sort */}
         {habits.length > 0 && (
-          <div className="flex flex-col sm:flex-row gap-4 mb-6">
-            <div className="relative flex-1">
-              <Icons.Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-stone-500 dark:text-amber-300" />
+          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mb-6">
+            <div className="relative flex-1 w-full">
+              <Icons.Search className="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 w-4 h-4 md:w-5 md:h-5 text-stone-500 dark:text-amber-300" />
               <Input 
                 ref={searchInputRef}
-                placeholder="Search habits... (Cmd+F)" 
-                className="pl-12 rounded-2xl border-2 border-stone-800 dark:border-amber-200 bg-stone-50/50 dark:bg-stone-900/50 font-semibold placeholder:text-stone-500 dark:placeholder:text-amber-300"
+                placeholder="Search habits..." 
+                className="pl-10 md:pl-12 h-10 md:h-11 rounded-2xl border-2 border-stone-800 dark:border-amber-200 bg-stone-50/50 dark:bg-stone-900/50 font-semibold text-sm md:text-base placeholder:text-stone-500 dark:placeholder:text-amber-300"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
             <Select value={sortOption} onValueChange={setSortOption}>
-              <SelectTrigger className="w-[180px] rounded-2xl border-2 border-stone-800 dark:border-amber-200 bg-stone-50/50 dark:bg-stone-900/50 font-bold">
+              <SelectTrigger className="w-full sm:w-[180px] h-10 md:h-11 rounded-2xl border-2 border-stone-800 dark:border-amber-200 bg-stone-50/50 dark:bg-stone-900/50 font-bold text-sm md:text-base">
                 <SelectValue placeholder="Sort by" />
               </SelectTrigger>
               <SelectContent className="border-2 border-stone-800 dark:border-amber-200 rounded-2xl">
@@ -160,22 +160,22 @@ export default function HabitsPage() {
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.2 }}
                   key={habit.id} 
-                  className="p-5 rounded-3xl border-2 border-stone-800 dark:border-amber-200 bg-gradient-to-br from-white to-stone-50 dark:from-stone-800 dark:to-stone-900 text-card-foreground shadow-md hover:shadow-xl hover:scale-102 transition-all flex flex-col gap-5"
+                  className="p-4 md:p-5 rounded-3xl border-2 border-stone-800 dark:border-amber-200 bg-gradient-to-br from-white to-stone-50 dark:from-stone-800 dark:to-stone-900 text-card-foreground shadow-md hover:shadow-xl hover:scale-102 transition-all flex flex-col gap-4 md:gap-5"
                 >
-                <div className="flex items-center gap-4">
-                  <div className="p-3 rounded-2xl border-2" style={{ backgroundColor: `${habit.color}15`, color: habit.color, borderColor: habit.color }}>
-                    <Icon className="w-7 h-7" />
+                <div className="flex items-center gap-3 md:gap-4">
+                  <div className="p-2 md:p-3 rounded-2xl border-2 shrink-0" style={{ backgroundColor: `${habit.color}15`, color: habit.color, borderColor: habit.color }}>
+                    <Icon className="w-5 h-5 md:w-7 md:h-7" />
                   </div>
-                  <div>
-                    <h3 className="font-black text-lg leading-tight text-stone-900 dark:text-amber-100">{habit.name}</h3>
-                    <p className="text-xs font-bold text-stone-500 dark:text-amber-300/80 mt-1 uppercase tracking-wider">
+                  <div className="min-w-0 flex-1">
+                    <h3 className="font-black text-base md:text-lg leading-tight text-stone-900 dark:text-amber-100 truncate">{habit.name}</h3>
+                    <p className="text-[10px] md:text-xs font-bold text-stone-500 dark:text-amber-300/80 mt-0.5 md:mt-1 uppercase tracking-wider">
                       {habit.schedule.length === 7 ? "Every day" : `${habit.schedule.length} days/week`}
                     </p>
                   </div>
                 </div>
 
                 {/* Past 7 Days Tracker */}
-                <div className="flex justify-between items-center bg-stone-100/50 dark:bg-stone-900/50 p-2 rounded-2xl border-2 border-stone-200 dark:border-stone-700">
+                <div className="flex justify-between items-center bg-stone-100/50 dark:bg-stone-900/50 p-1.5 md:p-2 rounded-2xl border-2 border-stone-200 dark:border-stone-700">
                   {[...Array(7)].map((_, i) => {
                     const d = new Date();
                     d.setDate(d.getDate() - (6 - i));
@@ -188,29 +188,29 @@ export default function HabitsPage() {
                         key={dateStr}
                         onClick={() => toggleCompletion(habit.id, d)}
                         disabled={!isScheduled}
-                        className={`flex flex-col items-center gap-1 p-1 rounded-xl transition-colors ${!isScheduled ? 'opacity-30 cursor-not-allowed' : 'hover:bg-stone-200 dark:hover:bg-stone-800'}`}
+                        className={`flex flex-col items-center gap-0.5 md:gap-1 p-0.5 md:p-1 rounded-xl transition-colors ${!isScheduled ? 'opacity-30 cursor-not-allowed' : 'hover:bg-stone-200 dark:hover:bg-stone-800'}`}
                       >
-                        <span className="text-[10px] uppercase font-bold text-stone-500 dark:text-amber-300/70">
+                        <span className="text-[8px] md:text-[10px] uppercase font-bold text-stone-500 dark:text-amber-300/70">
                           {d.toLocaleDateString('en-US', { weekday: 'narrow' })}
                         </span>
                         <div 
-                          className={`w-7 h-7 rounded-full border-2 flex items-center justify-center ${isCompleted ? 'bg-green-500 border-green-600 dark:bg-green-600 dark:border-green-500 text-white' : 'border-stone-300 dark:border-stone-600 text-transparent'}`}
+                          className={`w-5 h-5 md:w-7 md:h-7 rounded-full border-2 flex items-center justify-center ${isCompleted ? 'bg-green-500 border-green-600 dark:bg-green-600 dark:border-green-500 text-white' : 'border-stone-300 dark:border-stone-600 text-transparent'}`}
                         >
-                          <Icons.Check className="w-4 h-4" />
+                          <Icons.Check className="w-3 h-3 md:w-4 md:h-4" />
                         </div>
                       </button>
                     );
                   })}
                 </div>
 
-                <div className="grid grid-cols-2 gap-3 text-sm">
-                    <div className="bg-stone-100/50 dark:bg-stone-900/50 p-3 rounded-2xl text-center border-2 border-stone-200 dark:border-stone-700">
-                      <p className="text-stone-500 dark:text-amber-300/80 text-[10px] font-black uppercase tracking-widest mb-1">Current</p>
-                      <p className="text-2xl font-black text-stone-900 dark:text-amber-100">{currentStreak} <span className="text-xs font-bold text-stone-500 dark:text-amber-300/80 uppercase">days</span></p>
+                <div className="grid grid-cols-2 gap-2 md:gap-3 text-sm">
+                    <div className="bg-stone-100/50 dark:bg-stone-900/50 p-2 md:p-3 rounded-xl md:rounded-2xl text-center border-2 border-stone-200 dark:border-stone-700">
+                      <p className="text-stone-500 dark:text-amber-300/80 text-[8px] md:text-[10px] font-black uppercase tracking-widest mb-0.5 md:mb-1">Current</p>
+                      <p className="text-xl md:text-2xl font-black text-stone-900 dark:text-amber-100">{currentStreak} <span className="text-[10px] md:text-xs font-bold text-stone-500 dark:text-amber-300/80 uppercase">days</span></p>
                     </div>
-                    <div className="bg-stone-100/50 dark:bg-stone-900/50 p-3 rounded-2xl text-center border-2 border-stone-200 dark:border-stone-700">
-                      <p className="text-stone-500 dark:text-amber-300/80 text-[10px] font-black uppercase tracking-widest mb-1">Longest</p>
-                      <p className="text-2xl font-black text-stone-900 dark:text-amber-100">{longestStreak} <span className="text-xs font-bold text-stone-500 dark:text-amber-300/80 uppercase">days</span></p>
+                    <div className="bg-stone-100/50 dark:bg-stone-900/50 p-2 md:p-3 rounded-xl md:rounded-2xl text-center border-2 border-stone-200 dark:border-stone-700">
+                      <p className="text-stone-500 dark:text-amber-300/80 text-[8px] md:text-[10px] font-black uppercase tracking-widest mb-0.5 md:mb-1">Longest</p>
+                      <p className="text-xl md:text-2xl font-black text-stone-900 dark:text-amber-100">{longestStreak} <span className="text-[10px] md:text-xs font-bold text-stone-500 dark:text-amber-300/80 uppercase">days</span></p>
                     </div>
                   </div>
 

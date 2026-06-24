@@ -323,15 +323,15 @@ export default function DashboardPage() {
         </div>
 
         {/* Top Section: Panda Stats - Panda Den Theme */}
-        <section className="bg-gradient-to-br from-stone-50 to-amber-50 dark:from-stone-900 dark:to-amber-950 rounded-3xl p-8 border-2 border-stone-800 dark:border-amber-200 shadow-lg mb-8 flex flex-col md:flex-row gap-8 items-center justify-between relative overflow-hidden">
+        <section className="bg-gradient-to-br from-stone-50 to-amber-50 dark:from-stone-900 dark:to-amber-950 rounded-3xl p-5 md:p-8 border-2 border-stone-800 dark:border-amber-200 shadow-lg mb-6 md:mb-8 flex flex-col md:flex-row gap-5 md:gap-8 items-center justify-between relative overflow-hidden">
 
           {/* Decorative leaves in corner */}
           <div className="absolute top-4 right-4 text-4xl opacity-20">🍃</div>
           <div className="absolute bottom-4 left-4 text-3xl opacity-15">🎋</div>
 
           {/* Panda Display */}
-          <div className="flex items-center gap-6 relative z-10">
-            <div className="w-40 h-40 bg-gradient-to-br from-amber-100 to-stone-100 dark:from-amber-900/30 dark:to-stone-800/30 rounded-3xl flex items-center justify-center relative overflow-hidden shrink-0 border-2 border-stone-800 dark:border-amber-200">
+          <div className="flex items-center gap-4 md:gap-6 relative z-10 w-full md:w-auto">
+            <div className="w-28 h-28 md:w-40 md:h-40 bg-gradient-to-br from-amber-100 to-stone-100 dark:from-amber-900/30 dark:to-stone-800/30 rounded-3xl flex items-center justify-center relative overflow-hidden shrink-0 border-2 border-stone-800 dark:border-amber-200">
               <Canvas camera={{ position: [0, 2.0, 6], fov: 55 }}>
                 <ambientLight intensity={0.6} />
                 <directionalLight position={[10, 10, 5]} intensity={1} />
@@ -340,9 +340,9 @@ export default function DashboardPage() {
               </Canvas>
             </div>
             <div>
-              <h2 className="text-3xl font-black text-stone-900 dark:text-amber-100">{stage.name}</h2>
-              <p className="text-stone-700 dark:text-amber-200 font-semibold">🎭 Mood: {mood}</p>
-              <p className="text-sm text-stone-600 dark:text-stone-400 mt-1">Your panda companion</p>
+              <h2 className="text-2xl md:text-3xl font-black text-stone-900 dark:text-amber-100">{stage.name}</h2>
+              <p className="text-sm md:text-base text-stone-700 dark:text-amber-200 font-semibold">🎭 Mood: {mood}</p>
+              <p className="text-xs md:text-sm text-stone-600 dark:text-stone-400 mt-1">Your panda companion</p>
             </div>
           </div>
 
@@ -363,41 +363,42 @@ export default function DashboardPage() {
             </div>
 
             {/* Bamboo Counter */}
-            <div className="flex items-center gap-3 bg-gradient-to-r from-emerald-100 to-green-100 dark:from-emerald-900/40 dark:to-green-900/40 p-4 rounded-2xl border-2 border-emerald-700 dark:border-green-400 font-bold text-stone-900 dark:text-green-100">
-              <span className="text-3xl">🎋</span>
+            <div className="flex items-center gap-3 bg-gradient-to-r from-emerald-100 to-green-100 dark:from-emerald-900/40 dark:to-green-900/40 p-3 md:p-4 rounded-2xl border-2 border-emerald-700 dark:border-green-400 font-bold text-stone-900 dark:text-green-100">
+              <span className="text-2xl md:text-3xl">🎋</span>
               <div>
-                <div className="text-xs text-stone-700 dark:text-green-300 uppercase tracking-wider">Bamboo</div>
-                <div className="text-2xl font-black text-emerald-700 dark:text-green-300">{panda.bamboo}</div>
+                <div className="text-[10px] md:text-xs text-stone-700 dark:text-green-300 uppercase tracking-wider">Bamboo</div>
+                <div className="text-xl md:text-2xl font-black text-emerald-700 dark:text-green-300">{panda.bamboo}</div>
               </div>
             </div>
           </div>
         </section>
 
         {/* Completion Rate Indicator */}
-        <div className="mb-8 bg-gradient-to-r from-amber-100 to-stone-100 dark:from-amber-900/30 dark:to-stone-800/30 rounded-2xl p-4 border-2 border-stone-800 dark:border-amber-200 flex items-center justify-between">
+        <div className="mb-6 md:mb-8 bg-gradient-to-r from-amber-100 to-stone-100 dark:from-amber-900/30 dark:to-stone-800/30 rounded-2xl p-3 md:p-4 border-2 border-stone-800 dark:border-amber-200 flex items-center justify-between">
           <div>
-            <h3 className="font-bold text-stone-900 dark:text-amber-100">Today's Progress</h3>
-            <p className="text-sm text-stone-700 dark:text-amber-200">{completedToday} of {todaysHabits.length} habits completed</p>
+            <h3 className="font-bold text-sm md:text-base text-stone-900 dark:text-amber-100">Today's Progress</h3>
+            <p className="text-xs md:text-sm text-stone-700 dark:text-amber-200">{completedToday} of {todaysHabits.length} habits completed</p>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-black text-stone-900 dark:text-amber-100">{Math.round(completionRate)}%</div>
-            <div className="h-1.5 w-20 bg-stone-300 dark:bg-stone-700 rounded-full overflow-hidden mt-1 border border-stone-700 dark:border-amber-200">
+            <div className="text-2xl md:text-3xl font-black text-stone-900 dark:text-amber-100">{Math.round(completionRate)}%</div>
+            <div className="h-1.5 w-16 md:w-20 bg-stone-300 dark:bg-stone-700 rounded-full overflow-hidden mt-1 border border-stone-700 dark:border-amber-200">
               <div className="h-full bg-gradient-to-r from-green-500 to-emerald-500" style={{ width: `${completionRate}%` }} />
             </div>
           </div>
         </div>
 
         {/* Middle Section: Today's Habits */}
-        <section className="mb-12">
-          <div className="flex justify-between items-end mb-6">
+        <section className="mb-10 md:mb-12">
+          <div className="flex justify-between items-end mb-4 md:mb-6">
             <div>
-              <h2 className="text-3xl font-black text-stone-900 dark:text-amber-100">🎋 Today's Habits</h2>
-              <p className="text-stone-700 dark:text-amber-200 font-semibold mt-1">Complete habits to earn bamboo & XP!</p>
+              <h2 className="text-2xl md:text-3xl font-black text-stone-900 dark:text-amber-100">🎋 Today's Habits</h2>
+              <p className="text-sm md:text-base text-stone-700 dark:text-amber-200 font-semibold mt-0.5 md:mt-1">Complete habits to earn bamboo & XP!</p>
             </div>
             <Link href="/habits">
               <Button
                 variant="outline"
-                className="border-2 border-stone-800 dark:border-amber-200 font-bold hover:bg-stone-900 dark:hover:bg-amber-900/40 hover:text-white dark:hover:text-amber-100"
+                size="sm"
+                className="border-2 border-stone-800 dark:border-amber-200 font-bold hover:bg-stone-900 dark:hover:bg-amber-900/40 hover:text-white dark:hover:text-amber-100 hidden sm:flex"
               >
                 Manage Habits
               </Button>
@@ -423,40 +424,40 @@ export default function DashboardPage() {
                 return (
                   <div
                     key={habit.id}
-                    className={`p-5 rounded-3xl border-2 transition-all transform hover:scale-102 cursor-pointer shadow-md hover:shadow-lg ${isCompleted
+                    className={`p-4 md:p-5 rounded-2xl md:rounded-3xl border-2 transition-all transform hover:scale-102 cursor-pointer shadow-md hover:shadow-lg ${isCompleted
                       ? 'bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/30 dark:to-emerald-900/20 border-green-500 dark:border-green-400'
                       : 'bg-gradient-to-br from-white to-stone-50 dark:from-stone-800 dark:to-stone-900 border-stone-800 dark:border-amber-200'
                       }`}
                     onClick={() => handleToggle(habit.id)}
                   >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-4">
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-3 md:gap-4 min-w-0">
                         {/* Icon Badge */}
-                        <div className={`p-3 rounded-2xl transition-all border-2 font-bold text-lg ${isCompleted
+                        <div className={`p-2 md:p-3 rounded-xl md:rounded-2xl transition-all border-2 font-bold text-base md:text-lg shrink-0 ${isCompleted
                           ? 'bg-green-500 dark:bg-green-600 text-white border-green-600 dark:border-green-500'
                           : 'bg-stone-200 dark:bg-stone-700 text-stone-700 dark:text-amber-200 border-stone-800 dark:border-amber-200'
                           }`}>
-                          <Icon className="w-6 h-6" />
+                          <Icon className="w-5 h-5 md:w-6 md:h-6" />
                         </div>
 
                         {/* Habit Info */}
-                        <div>
-                          <h3 className={`font-black text-lg transition-all ${isCompleted
+                        <div className="min-w-0 flex-1 pr-2">
+                          <h3 className={`font-black text-base md:text-lg transition-all truncate ${isCompleted
                             ? 'line-through text-stone-500 dark:text-stone-400'
                             : 'text-stone-900 dark:text-amber-100'
                             }`}>
                             {habit.name}
                           </h3>
-                          <p className="text-xs text-stone-600 dark:text-amber-300 font-semibold">Tap to complete</p>
+                          <p className="text-[10px] md:text-xs text-stone-600 dark:text-amber-300 font-semibold truncate">Tap to complete</p>
                         </div>
                       </div>
 
                       {/* Completion Circle */}
-                      <div className={`w-10 h-10 rounded-full border-3 flex items-center justify-center transition-all font-bold text-lg ${isCompleted
+                      <div className={`w-8 h-8 md:w-10 md:h-10 shrink-0 rounded-full border-2 md:border-3 flex items-center justify-center transition-all font-bold text-base md:text-lg ${isCompleted
                         ? 'bg-green-500 dark:bg-green-600 border-green-600 dark:border-green-500 text-white'
                         : 'border-stone-800 dark:border-amber-200 text-stone-400'
                         }`}>
-                        {isCompleted && <Icons.Check className="w-6 h-6" />}
+                        {isCompleted && <Icons.Check className="w-4 h-4 md:w-6 md:h-6" />}
                       </div>
                     </div>
                   </div>
@@ -475,39 +476,39 @@ export default function DashboardPage() {
         </div>
 
         {/* Bottom Section: Summary Stats */}
-        <section className="grid md:grid-cols-3 gap-6 mb-24">
+        <section className="grid md:grid-cols-3 gap-4 md:gap-6 mb-24">
           {/* Daily Progress */}
-          <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/20 p-6 rounded-3xl border-2 border-blue-700 dark:border-blue-400 shadow-md">
-            <h3 className="font-bold text-blue-900 dark:text-blue-200 mb-4 uppercase tracking-wider text-sm">⚡ Daily Progress</h3>
-            <div className="space-y-3">
+          <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/20 p-5 md:p-6 rounded-2xl md:rounded-3xl border-2 border-blue-700 dark:border-blue-400 shadow-md">
+            <h3 className="font-bold text-blue-900 dark:text-blue-200 mb-2 md:mb-4 uppercase tracking-wider text-xs md:text-sm">⚡ Daily Progress</h3>
+            <div className="space-y-1 md:space-y-3">
               <div className="flex items-end gap-3">
-                <span className="text-5xl font-black text-blue-700 dark:text-blue-300">{Math.round(completionRate)}%</span>
+                <span className="text-4xl md:text-5xl font-black text-blue-700 dark:text-blue-300">{Math.round(completionRate)}%</span>
               </div>
-              <p className="text-sm text-blue-800 dark:text-blue-300 font-semibold">{completedToday} of {todaysHabits.length} completed</p>
+              <p className="text-xs md:text-sm text-blue-800 dark:text-blue-300 font-semibold">{completedToday} of {todaysHabits.length} completed</p>
             </div>
           </div>
 
           {/* Total Stats */}
-          <div className="bg-gradient-to-br from-emerald-50 to-green-100 dark:from-emerald-900/30 dark:to-green-800/20 p-6 rounded-3xl border-2 border-emerald-700 dark:border-green-400 shadow-md">
-            <h3 className="font-bold text-emerald-900 dark:text-green-200 mb-4 uppercase tracking-wider text-sm">🏔️ Jungle Stats</h3>
-            <ul className="space-y-3">
+          <div className="bg-gradient-to-br from-emerald-50 to-green-100 dark:from-emerald-900/30 dark:to-green-800/20 p-5 md:p-6 rounded-2xl md:rounded-3xl border-2 border-emerald-700 dark:border-green-400 shadow-md">
+            <h3 className="font-bold text-emerald-900 dark:text-green-200 mb-2 md:mb-4 uppercase tracking-wider text-xs md:text-sm">🏔️ Jungle Stats</h3>
+            <ul className="space-y-2 md:space-y-3">
               <li className="flex justify-between items-center font-bold text-emerald-900 dark:text-green-200">
-                <span>Total Habits</span>
-                <span className="text-2xl">{habits.length}</span>
+                <span className="text-sm md:text-base">Total Habits</span>
+                <span className="text-xl md:text-2xl">{habits.length}</span>
               </li>
               <li className="flex justify-between items-center font-bold text-emerald-900 dark:text-green-200">
-                <span>Active Today</span>
-                <span className="text-2xl">{todaysHabits.length}</span>
+                <span className="text-sm md:text-base">Active Today</span>
+                <span className="text-xl md:text-2xl">{todaysHabits.length}</span>
               </li>
             </ul>
           </div>
 
           {/* Panda Level */}
-          <div className="bg-gradient-to-br from-amber-50 to-yellow-100 dark:from-amber-900/30 dark:to-yellow-800/20 p-6 rounded-3xl border-2 border-amber-700 dark:border-yellow-400 shadow-md">
-            <h3 className="font-bold text-amber-900 dark:text-yellow-200 mb-4 uppercase tracking-wider text-sm">🐼 Panda Level</h3>
-            <div className="space-y-3">
-              <div className="text-3xl font-black text-amber-700 dark:text-yellow-300">{stage.name}</div>
-              <div className="text-sm text-amber-800 dark:text-yellow-300 font-semibold">Total XP: {panda.totalXP}</div>
+          <div className="bg-gradient-to-br from-amber-50 to-yellow-100 dark:from-amber-900/30 dark:to-yellow-800/20 p-5 md:p-6 rounded-2xl md:rounded-3xl border-2 border-amber-700 dark:border-yellow-400 shadow-md">
+            <h3 className="font-bold text-amber-900 dark:text-yellow-200 mb-2 md:mb-4 uppercase tracking-wider text-xs md:text-sm">🐼 Panda Level</h3>
+            <div className="space-y-1 md:space-y-3">
+              <div className="text-2xl md:text-3xl font-black text-amber-700 dark:text-yellow-300">{stage.name}</div>
+              <div className="text-xs md:text-sm text-amber-800 dark:text-yellow-300 font-semibold">Total XP: {panda.totalXP}</div>
             </div>
           </div>
         </section>
