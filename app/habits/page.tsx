@@ -67,7 +67,7 @@ export default function HabitsPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-stone-50 via-amber-50 to-stone-100 dark:from-stone-950 dark:via-stone-900 dark:to-stone-950 relative overflow-x-hidden text-foreground">
-      
+
       {/* Panda Den Background - Mountains and Bamboo */}
       <div className="fixed inset-0 pointer-events-none z-0">
         <svg className="absolute bottom-0 w-full h-96 opacity-5 dark:opacity-10" viewBox="0 0 1200 400" preserveAspectRatio="xMidYMid slice">
@@ -115,9 +115,9 @@ export default function HabitsPage() {
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mb-6">
             <div className="relative flex-1 w-full">
               <Icons.Search className="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 w-4 h-4 md:w-5 md:h-5 text-stone-500 dark:text-amber-300" />
-              <Input 
+              <Input
                 ref={searchInputRef}
-                placeholder="Search habits..." 
+                placeholder="Search habits..."
                 className="pl-10 md:pl-12 h-10 md:h-11 rounded-2xl border-2 border-stone-800 dark:border-amber-200 bg-stone-50/50 dark:bg-stone-900/50 font-semibold text-sm md:text-base placeholder:text-stone-500 dark:placeholder:text-amber-300"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -146,81 +146,81 @@ export default function HabitsPage() {
         ) : (
           <motion.div layout className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             <AnimatePresence>
-            {sortedHabits.map((habit) => {
-              // @ts-ignore
-              const Icon = Icons[habit.icon] || Icons.Target;
-              const currentStreak = calculateCurrentStreak(habit.completedDates, habit.schedule);
-              const longestStreak = calculateLongestStreak(habit.completedDates, habit.schedule);
+              {sortedHabits.map((habit) => {
+                // @ts-ignore
+                const Icon = Icons[habit.icon] || Icons.Target;
+                const currentStreak = calculateCurrentStreak(habit.completedDates, habit.schedule);
+                const longestStreak = calculateLongestStreak(habit.completedDates, habit.schedule);
 
-              return (
-                <motion.div 
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.2 }}
-                  key={habit.id} 
-                  className="p-4 md:p-5 rounded-3xl border-2 border-stone-800 dark:border-amber-200 bg-gradient-to-br from-white to-stone-50 dark:from-stone-800 dark:to-stone-900 text-card-foreground shadow-md hover:shadow-xl hover:scale-102 transition-all flex flex-col gap-4 md:gap-5"
-                >
-                <div className="flex items-center gap-3 md:gap-4">
-                  <div className="p-2 md:p-3 rounded-2xl border-2 shrink-0" style={{ backgroundColor: `${habit.color}15`, color: habit.color, borderColor: habit.color }}>
-                    <Icon className="w-5 h-5 md:w-7 md:h-7" />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <h3 className="font-black text-base md:text-lg leading-tight text-stone-900 dark:text-amber-100 truncate">{habit.name}</h3>
-                    <p className="text-[10px] md:text-xs font-bold text-stone-500 dark:text-amber-300/80 mt-0.5 md:mt-1 uppercase tracking-wider">
-                      {habit.schedule.length === 7 ? "Every day" : `${habit.schedule.length} days/week`}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Past 7 Days Tracker */}
-                <div className="flex justify-between items-center bg-stone-100/50 dark:bg-stone-900/50 p-1.5 md:p-2 rounded-2xl border-2 border-stone-200 dark:border-stone-700">
-                  {[...Array(7)].map((_, i) => {
-                    const d = new Date();
-                    d.setDate(d.getDate() - (6 - i));
-                    const dateStr = normalizeDate(d);
-                    const isScheduled = habit.schedule.includes(d.getDay());
-                    const isCompleted = habit.completedDates.includes(dateStr);
-                    
-                    return (
-                      <button
-                        key={dateStr}
-                        onClick={() => toggleCompletion(habit.id, d)}
-                        disabled={!isScheduled}
-                        className={`flex flex-col items-center gap-0.5 md:gap-1 p-0.5 md:p-1 rounded-xl transition-colors ${!isScheduled ? 'opacity-30 cursor-not-allowed' : 'hover:bg-stone-200 dark:hover:bg-stone-800'}`}
-                      >
-                        <span className="text-[8px] md:text-[10px] uppercase font-bold text-stone-500 dark:text-amber-300/70">
-                          {d.toLocaleDateString('en-US', { weekday: 'narrow' })}
-                        </span>
-                        <div 
-                          className={`w-5 h-5 md:w-7 md:h-7 rounded-full border-2 flex items-center justify-center ${isCompleted ? 'bg-green-500 border-green-600 dark:bg-green-600 dark:border-green-500 text-white' : 'border-stone-300 dark:border-stone-600 text-transparent'}`}
-                        >
-                          <Icons.Check className="w-3 h-3 md:w-4 md:h-4" />
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
-
-                <div className="grid grid-cols-2 gap-2 md:gap-3 text-sm">
-                    <div className="bg-stone-100/50 dark:bg-stone-900/50 p-2 md:p-3 rounded-xl md:rounded-2xl text-center border-2 border-stone-200 dark:border-stone-700">
-                      <p className="text-stone-500 dark:text-amber-300/80 text-[8px] md:text-[10px] font-black uppercase tracking-widest mb-0.5 md:mb-1">Current</p>
-                      <p className="text-xl md:text-2xl font-black text-stone-900 dark:text-amber-100">{currentStreak} <span className="text-[10px] md:text-xs font-bold text-stone-500 dark:text-amber-300/80 uppercase">days</span></p>
+                return (
+                  <motion.div
+                    layout
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 0.2 }}
+                    key={habit.id}
+                    className="p-4 md:p-5 rounded-3xl border-2 border-stone-800 dark:border-amber-200 bg-gradient-to-br from-white to-stone-50 dark:from-stone-800 dark:to-stone-900 text-card-foreground shadow-md hover:shadow-xl hover:scale-102 transition-all flex flex-col gap-4 md:gap-5"
+                  >
+                    <div className="flex items-center gap-3 md:gap-4">
+                      <div className="p-2 md:p-3 rounded-2xl border-2 shrink-0" style={{ backgroundColor: `${habit.color}15`, color: habit.color, borderColor: habit.color }}>
+                        <Icon className="w-5 h-5 md:w-7 md:h-7" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <h3 className="font-black text-base md:text-lg leading-tight text-stone-900 dark:text-amber-100 truncate">{habit.name}</h3>
+                        <p className="text-[10px] md:text-xs font-bold text-stone-500 dark:text-amber-300/80 mt-0.5 md:mt-1 uppercase tracking-wider">
+                          {habit.schedule.length === 7 ? "Every day" : `${habit.schedule.length} days/week`}
+                        </p>
+                      </div>
                     </div>
-                    <div className="bg-stone-100/50 dark:bg-stone-900/50 p-2 md:p-3 rounded-xl md:rounded-2xl text-center border-2 border-stone-200 dark:border-stone-700">
-                      <p className="text-stone-500 dark:text-amber-300/80 text-[8px] md:text-[10px] font-black uppercase tracking-widest mb-0.5 md:mb-1">Longest</p>
-                      <p className="text-xl md:text-2xl font-black text-stone-900 dark:text-amber-100">{longestStreak} <span className="text-[10px] md:text-xs font-bold text-stone-500 dark:text-amber-300/80 uppercase">days</span></p>
-                    </div>
-                  </div>
 
-                  <div className="flex justify-end gap-2 mt-auto pt-4 border-t-2 border-stone-100 dark:border-stone-800">
-                    <Button variant="ghost" size="sm" className="h-9 font-bold text-stone-600 dark:text-amber-200 hover:bg-stone-100 dark:hover:bg-stone-800 rounded-xl" onClick={() => setEditingId(habit.id)}>Edit</Button>
-                    <Button variant="destructive" size="sm" className="h-9 font-bold rounded-xl bg-red-100 text-red-700 hover:bg-red-200 dark:bg-red-900/30 dark:text-red-400 dark:hover:bg-red-900/50 border-2 border-transparent" onClick={() => deleteHabit(habit.id)}>Delete</Button>
-                  </div>
-                </motion.div>
-              );
-            })}
+                    {/* Past 7 Days Tracker */}
+                    <div className="flex justify-between items-center bg-stone-100/50 dark:bg-stone-900/50 p-1.5 md:p-2 rounded-2xl border-2 border-stone-200 dark:border-stone-700">
+                      {[...Array(7)].map((_, i) => {
+                        const d = new Date();
+                        d.setDate(d.getDate() - (6 - i));
+                        const dateStr = normalizeDate(d);
+                        const isScheduled = habit.schedule.includes(d.getDay());
+                        const isCompleted = habit.completedDates.includes(dateStr);
+
+                        return (
+                          <button
+                            key={dateStr}
+                            onClick={() => toggleCompletion(habit.id, d)}
+                            disabled={!isScheduled}
+                            className={`flex flex-col items-center gap-0.5 md:gap-1 p-0.5 md:p-1 rounded-xl transition-colors ${!isScheduled ? 'opacity-30 cursor-not-allowed' : 'hover:bg-stone-200 dark:hover:bg-stone-800'}`}
+                          >
+                            <span className="text-[8px] md:text-[10px] uppercase font-bold text-stone-500 dark:text-amber-300/70">
+                              {d.toLocaleDateString('en-US', { weekday: 'narrow' })}
+                            </span>
+                            <div
+                              className={`w-5 h-5 md:w-7 md:h-7 rounded-full border-2 flex items-center justify-center ${isCompleted ? 'bg-green-500 border-green-600 dark:bg-green-600 dark:border-green-500 text-white' : 'border-stone-300 dark:border-stone-600 text-transparent'}`}
+                            >
+                              <Icons.Check className="w-3 h-3 md:w-4 md:h-4" />
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-2 md:gap-3 text-sm">
+                      <div className="bg-stone-100/50 dark:bg-stone-900/50 p-2 md:p-3 rounded-xl md:rounded-2xl text-center border-2 border-stone-200 dark:border-stone-700">
+                        <p className="text-stone-500 dark:text-amber-300/80 text-[8px] md:text-[10px] font-black uppercase tracking-widest mb-0.5 md:mb-1">Current</p>
+                        <p className="text-xl md:text-2xl font-black text-stone-900 dark:text-amber-100">{currentStreak} <span className="text-[10px] md:text-xs font-bold text-stone-500 dark:text-amber-300/80 uppercase">days</span></p>
+                      </div>
+                      <div className="bg-stone-100/50 dark:bg-stone-900/50 p-2 md:p-3 rounded-xl md:rounded-2xl text-center border-2 border-stone-200 dark:border-stone-700">
+                        <p className="text-stone-500 dark:text-amber-300/80 text-[8px] md:text-[10px] font-black uppercase tracking-widest mb-0.5 md:mb-1">Longest</p>
+                        <p className="text-xl md:text-2xl font-black text-stone-900 dark:text-amber-100">{longestStreak} <span className="text-[10px] md:text-xs font-bold text-stone-500 dark:text-amber-300/80 uppercase">days</span></p>
+                      </div>
+                    </div>
+
+                    <div className="flex justify-end gap-2 mt-auto pt-4 border-t-2 border-stone-100 dark:border-stone-800">
+                      <Button variant="ghost" size="sm" className="h-9 font-bold text-stone-600 dark:text-amber-200 hover:bg-stone-100 dark:hover:bg-stone-800 rounded-xl" onClick={() => setEditingId(habit.id)}>Edit</Button>
+                      <Button variant="destructive" size="sm" className="h-9 font-bold rounded-xl bg-red-100 text-red-700 hover:bg-red-200 dark:bg-red-900/30 dark:text-red-400 dark:hover:bg-red-900/50 border-2 border-transparent" onClick={() => deleteHabit(habit.id)}>Delete</Button>
+                    </div>
+                  </motion.div>
+                );
+              })}
             </AnimatePresence>
           </motion.div>
         )}

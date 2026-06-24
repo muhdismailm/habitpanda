@@ -69,6 +69,7 @@ export function HabitForm({ initialValues, onSubmit, onCancel }: HabitFormProps)
   };
 
   return (
+<<<<<<< HEAD
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 md:space-y-6">
       {/* Name */}
       <div className="space-y-1.5 md:space-y-2">
@@ -85,12 +86,27 @@ export function HabitForm({ initialValues, onSubmit, onCancel }: HabitFormProps)
       <div className="space-y-1.5 md:space-y-2">
         <label className="text-sm md:text-base font-bold text-stone-900 dark:text-amber-100">Icon</label>
         <div className="flex flex-wrap gap-1.5 md:gap-2">
+=======
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      {/* Name */}
+      <div className="space-y-2">
+        <label className="text-sm font-medium">Habit Name</label>
+        <Input placeholder="e.g. Drink 2L Water" {...register("name")} />
+        {errors.name && <p className="text-xs text-destructive">{errors.name.message}</p>}
+      </div>
+
+      {/* Icon Selection */}
+      <div className="space-y-2">
+        <label className="text-sm font-medium">Icon</label>
+        <div className="flex flex-wrap gap-2">
+>>>>>>> e4ff0fe8cf1441af01a2c23e803b8bf9e29750cf
           {Object.entries(ICONS).map(([name, IconComp]) => (
             <button
               key={name}
               type="button"
               onClick={() => setValue("icon", name, { shouldValidate: true })}
               className={cn(
+<<<<<<< HEAD
                 "p-2 md:p-3 rounded-xl md:rounded-2xl border-2 transition-all",
                 selectedIcon === name 
                   ? "border-green-600 bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400" 
@@ -108,19 +124,42 @@ export function HabitForm({ initialValues, onSubmit, onCancel }: HabitFormProps)
       <div className="space-y-1.5 md:space-y-2">
         <label className="text-sm md:text-base font-bold text-stone-900 dark:text-amber-100">Color</label>
         <div className="flex flex-wrap gap-2 md:gap-3">
+=======
+                "p-2 rounded-lg border transition-colors",
+                selectedIcon === name ? "border-primary bg-primary/10" : "border-border hover:bg-muted"
+              )}
+            >
+              <IconComp className="w-5 h-5" />
+            </button>
+          ))}
+        </div>
+        {errors.icon && <p className="text-xs text-destructive">{errors.icon.message}</p>}
+      </div>
+
+      {/* Color Selection */}
+      <div className="space-y-2">
+        <label className="text-sm font-medium">Color</label>
+        <div className="flex gap-2">
+>>>>>>> e4ff0fe8cf1441af01a2c23e803b8bf9e29750cf
           {COLORS.map((color) => (
             <button
               key={color}
               type="button"
               onClick={() => setValue("color", color, { shouldValidate: true })}
               className={cn(
+<<<<<<< HEAD
                 "w-8 h-8 md:w-10 md:h-10 rounded-full border-2 transition-transform shrink-0",
                 selectedColor === color ? "scale-110 border-stone-900 dark:border-white shadow-md" : "border-stone-800/20 dark:border-amber-200/20 hover:scale-105"
+=======
+                "w-8 h-8 rounded-full border-2 transition-transform",
+                selectedColor === color ? "scale-110 border-foreground" : "border-transparent hover:scale-105"
+>>>>>>> e4ff0fe8cf1441af01a2c23e803b8bf9e29750cf
               )}
               style={{ backgroundColor: color }}
             />
           ))}
         </div>
+<<<<<<< HEAD
         {errors.color && <p className="text-xs text-red-500 font-bold">{errors.color.message}</p>}
       </div>
 
@@ -129,6 +168,16 @@ export function HabitForm({ initialValues, onSubmit, onCancel }: HabitFormProps)
         <label className="text-sm md:text-base font-bold text-stone-900 dark:text-amber-100">Schedule</label>
         <p className="text-xs text-stone-600 dark:text-amber-200/70 mb-2">Select the days you want to track this habit.</p>
         <div className="flex flex-wrap gap-1.5 md:gap-2">
+=======
+        {errors.color && <p className="text-xs text-destructive">{errors.color.message}</p>}
+      </div>
+
+      {/* Schedule */}
+      <div className="space-y-2">
+        <label className="text-sm font-medium">Schedule</label>
+        <p className="text-xs text-muted-foreground mb-2">Select the days you want to track this habit.</p>
+        <div className="flex gap-2">
+>>>>>>> e4ff0fe8cf1441af01a2c23e803b8bf9e29750cf
           {DAYS.map((day) => {
             const isSelected = selectedSchedule.includes(day.id);
             return (
@@ -137,10 +186,17 @@ export function HabitForm({ initialValues, onSubmit, onCancel }: HabitFormProps)
                 type="button"
                 onClick={() => toggleDay(day.id)}
                 className={cn(
+<<<<<<< HEAD
                   "w-8 h-8 md:w-10 md:h-10 rounded-full font-black text-xs md:text-sm transition-colors shrink-0 border-2",
                   isSelected
                     ? "bg-green-600 border-green-700 text-white shadow-inner"
                     : "bg-stone-100 dark:bg-stone-800 border-stone-800/20 dark:border-amber-200/20 text-stone-500 dark:text-amber-300/50 hover:bg-stone-200 dark:hover:bg-stone-700"
+=======
+                  "w-10 h-10 rounded-full font-medium text-sm transition-colors",
+                  isSelected
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-muted text-muted-foreground hover:bg-muted/80"
+>>>>>>> e4ff0fe8cf1441af01a2c23e803b8bf9e29750cf
                 )}
               >
                 {day.label}
@@ -148,6 +204,7 @@ export function HabitForm({ initialValues, onSubmit, onCancel }: HabitFormProps)
             );
           })}
         </div>
+<<<<<<< HEAD
         {errors.schedule && <p className="text-xs text-red-500 font-bold">{errors.schedule.message}</p>}
       </div>
 
@@ -160,6 +217,18 @@ export function HabitForm({ initialValues, onSubmit, onCancel }: HabitFormProps)
         <Button type="submit" className="bg-green-600 hover:bg-green-700 text-white font-bold border-2 border-green-800 dark:border-green-500 rounded-xl md:rounded-2xl">
           Save Habit
         </Button>
+=======
+        {errors.schedule && <p className="text-xs text-destructive">{errors.schedule.message}</p>}
+      </div>
+
+      <div className="flex justify-end gap-2 pt-4">
+        {onCancel && (
+          <Button type="button" variant="outline" onClick={onCancel}>
+            Cancel
+          </Button>
+        )}
+        <Button type="submit">Save Habit</Button>
+>>>>>>> e4ff0fe8cf1441af01a2c23e803b8bf9e29750cf
       </div>
     </form>
   );
