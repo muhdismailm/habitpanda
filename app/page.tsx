@@ -115,6 +115,14 @@ export default function Home() {
                 </div>
               </div>
 
+              <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                <div className="flex items-center justify-center w-12 h-12 rounded-full border-4 border-stone-800 dark:border-amber-200 bg-emerald-500 text-white font-black text-xl shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">5</div>
+                <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-gradient-to-br from-stone-50 to-amber-50 dark:from-stone-800 dark:to-amber-900/20 p-6 rounded-3xl border-2 border-stone-800 dark:border-amber-200 shadow-lg">
+                  <h4 className="font-black text-xl mb-1 text-stone-900 dark:text-amber-100">The Jungle Shop 🛒</h4>
+                  <p className="text-stone-700 dark:text-amber-200 font-semibold">Spend your hard-earned Bamboo on 3D decorations for your Panda's habitat! Equip items to see them appear live on your dashboard.</p>
+                </div>
+              </div>
+
             </div>
           </div>
         </section>
