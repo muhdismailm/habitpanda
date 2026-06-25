@@ -6,7 +6,7 @@ Built entirely as a robust client-side Next.js application, it requires no backe
 
 ---
 
-## 🚀 Setup & Installation
+## 🚀 How to Run the Project Locally (Setup Steps)
 
 1. **Clone the repository** (or download the source code).
 2. **Install dependencies:**
@@ -21,59 +21,42 @@ Built entirely as a robust client-side Next.js application, it requires no backe
 
 ---
 
-## 🏗️ Architecture
+## 🏗️ Key Decisions and Why
 
-- **Framework:** Next.js 16 (App Router) with React 19
-- **State Management:** Custom React hooks (`useHabits`, `usePanda`) syncing securely to browser `localStorage`.
-- **UI & Styling:** Tailwind CSS v4, `shadcn/ui`, and Lucide React Icons.
-- **Form Validation:** `react-hook-form` and `zod` schema parsing.
-- **3D Graphics & Animations:** `framer-motion` for page-scroll effects, and `@react-three/fiber` with `@react-three/drei` for procedural 3D model rendering.
-
----
-
-## 📊 Data Model
-
-### Habit
-```typescript
-interface Habit {
-  id: string;             // UUID
-  name: string;           // E.g., "Read 20 Minutes"
-  icon: string;           // Lucide icon reference
-  color: string;          // Hex color
-  schedule: number[];     // Array of days (0=Sun, 6=Sat)
-  completedDates: string[]; // Array of ISO Date Strings
-  createdAt: string;
-}
-```
-
-### Panda State
-```typescript
-interface PandaState {
-  bamboo: number;         // Current currency
-  totalXP: number;        // Determines evolution stage
-  inventory: string[];    // Array of unlocked item IDs
-  equipped: string[];     // Array of currently equipped item IDs
-}
-```
+- **Framework (Next.js 16 App Router & React 19):** Chosen for its robust routing, fast development experience, and modern React features.
+- **State Management & Persistence:** Custom React hooks (`useHabits`, `usePanda`) syncing to `localStorage`. I chose this over a backend database to keep the app lightweight, fast, and completely private. It eliminated the need for complex authentication flows for this version.
+- **UI & Styling:** Tailwind CSS v4 and `shadcn/ui`. Selected to rapidly build a beautiful, accessible, and responsive mobile-first UI without wrestling with custom CSS.
+- **3D Graphics:** `@react-three/fiber` and `@react-three/drei`. Chosen to bring the virtual Panda to life, providing a much more engaging and tangible reward mechanism than static images.
+- **Data Model:** Designed to be flat and easily serializable. The `Habit` model stores `completedDates` as an array of ISO strings, and `schedule` as an array of days (0-6), making date math and streak calculations straightforward.
 
 ---
 
-## 🔥 Streak Logic Engine
+## 🤯 The Hardest Problem Hit and How I Solved It
 
-Streaks are calculated as a pure utility function. 
-The logic elegantly handles **custom schedules** (e.g., Mon/Wed/Fri). If a user completes a habit on Friday, their streak will carry over through the weekend without breaking, assuming Saturday and Sunday are "scheduled off-days".
+The hardest problem was **calculating accurate streaks with custom schedules**. 
 
-- **Current Streak:** Iterates backward from the current date, checking the scheduled array.
-- **Longest Streak:** Processes the historical completion array chronologically, finding the maximum unbroken consecutive chain.
+Most habit trackers assume a habit must be done every single day. If you miss a day, the streak breaks. However, HabitPanda allows custom schedules (e.g., gym on Mon/Wed/Fri). If a user completes their habit on Friday, their streak must remain active through Saturday and Sunday, only breaking if they fail to complete it on Monday.
+
+**The Solution:** I built a custom pure utility function for streak calculation. Instead of just counting consecutive calendar days, the engine iterates backwards from the current date. For each day, it checks if that day of the week is in the habit's `schedule` array. 
+- If the day is scheduled and completed, the streak increments.
+- If the day is scheduled and *not* completed (and it's not today), the streak breaks.
+- If the day is *not* scheduled (an off-day), the logic simply skips to the previous day without breaking the streak, carrying the streak over the off-days.
+
+---
+
+## 🤖 AI Usage (Where, How, Changes, and Rejections)
+
+I used AI as a pair-programming partner throughout development:
+- **Where & How:** I used AI to generate the initial boilerplate for the 3D Panda model using `@react-three/fiber`, write the complex logic for the streak calculator, and generate the Tailwind layout structure for the mobile-first dashboard.
+- **What I Changed/Fixed:** The AI initially generated a streak calculator that assumed daily habits. I had to significantly refactor and fix its output to support the custom scheduled off-days logic described above.
+- **What I Rejected:** The AI suggested setting up a Redux store for state management. I explicitly rejected this in favor of a much simpler, bespoke `localStorage` hook, which was more appropriate for a local-only application.
 
 ---
 
-## 🎋 Gamification Engine
 
-Habits shouldn't be boring. 
-- **Rewards:** Completing a habit grants **+10 Bamboo** and **+5 XP**.
-- **Milestones:** Hitting a 7-day streak grants a **+25 Bamboo** bonus, and 30 days grants **+100 Bamboo**.
-- **Panda Stages:** As XP grows, the Panda evolves from *Baby Panda* -> *Adult Panda* -> *Elder Panda*, scaling in 3D size.
-- **Mood Engine:** The Panda's mood (and its idle animation) dynamically changes to Happy, Neutral, or Sad based on the completion rate of *today's scheduled habits*.
+## ⭐ Stretch Goals Attempted
 
----
+I successfully integrated several stretch goals to make the app stand out:
+1. **Gamification Engine:** Added a dual-currency system (XP and Bamboo). XP drives the Panda's physical evolution (Baby -> Adult -> Elder), while Bamboo acts as a spendable currency.
+2. **Dynamic 3D Companion:** Used React Three Fiber to render a 3D Panda whose mood and animation state react dynamically to the day's completion rate.
+3. **Advanced Scheduling:** Supported custom days-of-the-week scheduling rather than just simple daily habits.
